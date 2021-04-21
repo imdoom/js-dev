@@ -1,11 +1,13 @@
 import React from 'react';
 import senate from './pro-congress-117-senate.json';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Table } from 'react-bootstrap';
 
 const heading = {
   "title": "Senate members data for 117th congress"
 };
 
-const Banner = ({ title }) => <h1>{title}</h1>;
+const Banner = ({ title }) => <h1 style={center}>{title}</h1>;
 
 const getFullName = member => (
   member.middle_name ? member.first_name +' '+ member.middle_name +' '+ member.last_name : member.first_name +' '+ member.last_name
@@ -13,7 +15,7 @@ const getFullName = member => (
   
 const Member = ({ member }) => (
   <tr>
-    <td>{ getFullName(member) }</td>
+    <td><a href={member.url}>{ getFullName(member) }</a></td>
     <td>{ member.party }</td>
     <td>{ member.state }</td>
     <td>{ member.seniority }</td>
@@ -22,7 +24,7 @@ const Member = ({ member }) => (
 );
 
 const MemberList = ({ members }) => (
-  <table>
+  <Table striped bordered hover>
     <tr>
       <th>Name</th>
       <th>Party</th>
@@ -30,15 +32,22 @@ const MemberList = ({ members }) => (
       <th>Seniority</th>
       <th>Percentage of votes with party</th>
     </tr>
+    <tbody>
     { members.map(member => <Member key={member.id} member={ member } />) }
-  </table>
+    </tbody>
+  </Table>
 );
 
 const App = () =>  (
   <div>
-    <Banner title={heading.title}/>
+    <Banner title={heading.title} />
     <MemberList members={ senate.results[0].members }/>
   </div>
 );
+
+const center = {
+  display: 'flex',  
+  justifyContent:'center'
+};
 
 export default App;
