@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 
-const Navigation = () => (
+const Navigation = ({selected}) => (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
     <Navbar.Brand href="/">Home</Navbar.Brand>
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
