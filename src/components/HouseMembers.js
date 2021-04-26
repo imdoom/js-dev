@@ -17,7 +17,10 @@ const getFullName = member => (
     </tr>
   );
   
-  const HouseMembers = ({checked}) => (
+  const HouseMembers = ({selected, checked}) => {
+    var list = house.results[0].members.filter(member => checked.includes(member.party));
+    list = (selected == 'ALL' ? list : list.filter(member => checked.includes(member.party) && selected == member.state));
+    return (
     <Table striped bordered hover>
       <tr>
         <th>Name</th>
@@ -27,9 +30,10 @@ const getFullName = member => (
         <th>Percentage of votes with party</th>
       </tr>
       <tbody>
-      { house.results[0].members.filter(member => checked.includes(member.party)).map(member => <Member key={member.id} member={ member } />) }
+      { list.map(member => <Member key={member.id} member={ member } />) }
       </tbody>
     </Table>
-  );
+    );
+  };
 
   export default HouseMembers;

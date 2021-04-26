@@ -20,15 +20,15 @@ const App = () =>  {
     return [ checked, toggle ];
   };
   const [checked, toggle] = useSelection();
-
+  const [selected, setSelected] = useState('All');
   return (
     <div>
       <Banner title={heading.title} />
       <Navigation />
-      <Filter checked={checked} toggle={toggle}/>
+      <Filter selected={selected} setSelected={setSelected} checked={checked} toggle={toggle}/>
       <Switch>
-        <Route path='/senateMembers' component={() => (<SenateMembers checked={checked}/>)}/>
-        <Route path='/houseMembers' component={() => (<HouseMembers checked={checked}/>)}/>
+        <Route path='/senateMembers' component={() => (<SenateMembers selected={selected} checked={checked}/>)}/>
+        <Route path='/houseMembers' component={() => (<HouseMembers selected={selected} checked={checked}/>)}/>
         <Route path='/' component={Home}/>
       </Switch>
     </div>
