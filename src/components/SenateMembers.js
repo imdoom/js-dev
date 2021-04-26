@@ -17,7 +17,7 @@ const getFullName = member => (
     </tr>
   );
   
-  const SenateMembers = ({selected}) => (
+  const SenateMembers = ({checked}) => (
     <Table striped bordered hover>
       <tr>
         <th>Name</th>
@@ -27,7 +27,7 @@ const getFullName = member => (
         <th>Percentage of votes with party</th>
       </tr>
       <tbody>
-      { senate.results[0].members.filter(member => selected.includes(member.party)).map(member => <Member key={member.id} member={ member } />) }
+      { senate.results[0].members.filter(member => checked.includes(member.party)).map(member => <Member key={member.id} member={ member } />) }
       </tbody>
     </Table>
   );

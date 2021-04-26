@@ -13,22 +13,22 @@ const heading = {
 
 const App = () =>  {
   const useSelection = () => {
-    const [selected, setSelected] = useState([]);
+    const [checked, setSelected] = useState([]);
     const toggle = (x) => {
-      setSelected(selected.includes(x) ? selected.filter(y => y !== x) : [x].concat(selected))
+      setSelected(checked.includes(x) ? checked.filter(y => y !== x) : [x].concat(checked))
     };
-    return [ selected, toggle ];
+    return [ checked, toggle ];
   };
-  const [selected, toggle] = useSelection();
+  const [checked, toggle] = useSelection();
 
   return (
     <div>
       <Banner title={heading.title} />
       <Navigation />
-      <Filter selected={selected} toggle={toggle}/>
+      <Filter checked={checked} toggle={toggle}/>
       <Switch>
-        <Route path='/senateMembers' component={() => (<SenateMembers selected={selected}/>)}/>
-        <Route path='/houseMembers' component={() => (<HouseMembers selected={selected}/>)}/>
+        <Route path='/senateMembers' component={() => (<SenateMembers checked={checked}/>)}/>
+        <Route path='/houseMembers' component={() => (<HouseMembers checked={checked}/>)}/>
         <Route path='/' component={Home}/>
       </Switch>
     </div>
