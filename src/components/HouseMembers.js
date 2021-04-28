@@ -19,7 +19,7 @@ const getFullName = member => (
   
   const HouseMembers = ({selected, checked}) => {
     var list = house.results[0].members.filter(member => checked.includes(member.party));
-    list = (selected == 'ALL' ? list : list.filter(member => checked.includes(member.party) && selected == member.state));
+    list = (selected == 'ALL' ? list : list.filter(member => selected == member.state));
     return (
     <Table striped bordered hover>
       <tr>

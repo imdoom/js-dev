@@ -13,14 +13,14 @@ const heading = {
 
 const App = () =>  {
   const useSelection = () => {
-    const [checked, setSelected] = useState([]);
+    const [checked, setSelected] = useState(['R']);
     const toggle = (x) => {
       setSelected(checked.includes(x) ? checked.filter(y => y !== x) : [x].concat(checked))
     };
     return [ checked, toggle ];
   };
   const [checked, toggle] = useSelection();
-  const [selected, setSelected] = useState('All');
+  const [selected, setSelected] = useState('ALL');
   return (
     <div>
       <Banner title={heading.title} />
