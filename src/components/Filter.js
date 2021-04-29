@@ -2,7 +2,7 @@ import React from 'react';
 import {InputGroup, DropdownButton, Dropdown} from "react-bootstrap";
 
 const states = [
-    'All', 'AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FM','FL','GA',
+    'ALL', 'AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FM','FL','GA',
     'GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MH','MD','MA',
     'MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND',
     'MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN','TX','UT',
@@ -40,7 +40,6 @@ const Filter = ({selected, setSelected, checked, toggle}) => (
                 id="input-group-dropdown"
                 onSelect={setSelected}
                 >
-                {/* <Dropdown.Item eventKey='ALL'>ALL</Dropdown.Item> */}
                 {states.map(state => <Dropdown.Item eventKey={state}>{state}</Dropdown.Item>)}
             </DropdownButton>
         </InputGroup.Append>
