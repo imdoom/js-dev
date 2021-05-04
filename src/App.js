@@ -6,6 +6,7 @@ import Filter from './components/Filter';
 import Home from './components/Home';
 import Banner from './components/Banner';
 import { Route, Switch } from 'react-router-dom';
+import Statistics from './components/Statistics';
 
 const heading = {
   "title": "TGIF Logo"
@@ -23,6 +24,7 @@ const App = () =>  {
   const [selected, setSelected] = useState('ALL');
   return (
     <div>
+      <Statistics />
       <Banner title={heading.title} />
       <Navigation />
       <Filter selected={selected} setSelected={setSelected} checked={checked} toggle={toggle}/>
