@@ -18,8 +18,8 @@ const getFullName = member => (
   );
   
   const SenateMembers = ({selected, checked}) => {
-    var list = (selected == 'ALL' ? senate.results[0].members.filter(member => checked.includes(member.party)) : 
-                                    senate.results[0].members.filter(member => selected == member.state && checked.includes(member.party)));
+    var list = (selected === 'ALL' ? senate.results[0].members.filter(member => checked.includes(member.party)) : 
+                                    senate.results[0].members.filter(member => selected === member.state && checked.includes(member.party)));
     return (
     <Table striped bordered hover>
       <tr>

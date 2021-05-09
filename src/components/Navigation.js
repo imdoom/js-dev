@@ -7,8 +7,12 @@ const Navigation = ({selected}) => (
     <Navbar.Brand href="/">Home</Navbar.Brand>
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
     <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="mr-auto">   
+        <Nav className="">   
         <NavDropdown title="Congress 117" id="collasible-nav-dropdown">
+            <NavDropdown.Item href="/senateMembers">Senate</NavDropdown.Item>
+            <NavDropdown.Item href="/houseMembers">House</NavDropdown.Item>
+        </NavDropdown>
+        <NavDropdown title="Attendance" id="collasible-nav-dropdown">
             <NavDropdown.Item href="/senateMembers">Senate</NavDropdown.Item>
             <NavDropdown.Item href="/houseMembers">House</NavDropdown.Item>
         </NavDropdown>
