@@ -10,8 +10,10 @@ var statistics =
         "numberOfIndependents" : "",
         "averageVotesWithPartyDem" : "",
         "averageVotesWithPartyRep" : "",
-        "lowestVotesParty" : [],
-        "highestVotesParty" : [],
+        "leastLoyal" : [],
+        "mostLoyal" : [],
+        "leastEngaged" : [],
+        "mostEngaged" : []
     },
     "house": {
         "numberOfDemocrats" : "",
@@ -19,8 +21,10 @@ var statistics =
         "numberOfIndependents" : "",
         "averageVotesWithPartyDem" : "",
         "averageVotesWithPartyRep" : "",
-        "lowestVotesParty" : [],
-        "highestVotesParty" : [],
+        "leastLoyal" : [],
+        "mostLoyal" : [],
+        "leastEngaged" : [],
+        "mostEngaged" : []
     }
 };
 
@@ -58,40 +62,51 @@ const Statistics = () => {
     repsHouse.forEach(member => sumRep += member.votes_with_party_pct);
     statistics.house.averageVotesWithPartyRep = sumRep/repsHouse.length;
 
-    // console.log(membersSenate.length);
-
-    function VWPBottom10(branch, members, num) {
-        if (branch.lowestVotesParty.length/num < 0.1) {
-            let i = 0;
-            while(members[0].votes_with_party_pct === members[i].votes_with_party_pct)
-                i++;
-            branch.lowestVotesParty = branch.lowestVotesParty.concat(members.splice(0, i));
-            VWPBottom10(branch, members, num);
-        }
+    function votesWithParty(type, members, num) {
+        let n = Math.ceil(num/10) - 1;
+        while(members[n].votes_with_party_pct === members[n+1].votes_with_party_pct)
+            n++;
+        members.reduce((acc, curr, idx) => idx > n ? acc : type.push(Object.assign({}, curr)) && type, []);
     }
 
-    function VWPTop10(branch, members, num) {
-        if (branch.highestVotesParty.length/num < 0.1) {
-            let i = 0;
-            while(members[0].votes_with_party_pct === members[i].votes_with_party_pct)
-                i++;
-            branch.highestVotesParty = branch.highestVotesParty.concat(members.splice(0, i));
-            VWPTop10(branch, members, num);
-        }
-    }
     membersSenate.sort((a,b) => a.votes_with_party_pct - b.votes_with_party_pct);
-    VWPBottom10(statistics.senate, membersSenate, numSenate);
+    votesWithParty(statistics.senate.leastLoyal, membersSenate, numSenate);
 
     membersSenate.sort((a,b) => b.votes_with_party_pct - a.votes_with_party_pct);
-    VWPTop10(statistics.senate, membersSenate, numSenate);
+    votesWithParty(statistics.senate.mostLoyal, membersSenate, numSenate);
 
     membersHouse.sort((a,b) => a.votes_with_party_pct - b.votes_with_party_pct);
-    VWPBottom10(statistics.house, membersHouse, numHouse);  
+    votesWithParty(statistics.house.leastLoyal, membersHouse, numHouse);  
 
     membersHouse.sort((a,b) => b.votes_with_party_pct - a.votes_with_party_pct);
-    VWPTop10(statistics.house, membersHouse, numHouse);
+    votesWithParty(statistics.house.mostLoyal, membersHouse, numHouse);
 
-    return (<h1>{JSON.stringify(numHouse)}</h1>);
+    function engagement(type, members, num) {
+        let n = Math.ceil(num/10) - 1;
+        while(members[n].missed_votes_pct === members[n+1].missed_votes_pct)
+            n++;
+        members.reduce((acc, curr, idx) => idx > n ? acc : type.push(Object.assign({}, curr)) && type, []);
+    }
+
+    function count(members) {
+        let n = 0;
+        members.forEach(x => x.missed_votes_pct === 0 ? n++ : true);
+        return n;
+    }
+
+    membersSenate.sort((a,b) => b.missed_votes_pct - a.missed_votes_pct);
+    engagement(statistics.senate.leastEngaged, membersSenate, numSenate);
+
+    membersSenate.sort((a,b) => a.missed_votes_pct - b.missed_votes_pct);
+    engagement(statistics.senate.mostEngaged, membersSenate, numSenate);
+
+    membersSenate.sort((a,b) => b.missed_votes_pct - a.missed_votes_pct);
+    engagement(statistics.house.leastEngaged, membersHouse, numHouse);  
+
+    membersSenate.sort((a,b) => a.missed_votes_pct - b.missed_votes_pct);
+    engagement(statistics.house.mostEngaged, membersHouse, numHouse);
+
+    return (<h1>{JSON.stringify(statistics.senate.leastEngaged.length)}</h1>);
 };
 
 export default Statistics;
