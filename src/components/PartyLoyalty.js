@@ -2,16 +2,15 @@ import React from 'react';
 import Statistics from './Statistics.js';
 import {Container, Row, Col, Table} from 'react-bootstrap';
 
-const Attendance = ({chamber}) => {
+const PartyLoyalty = ({chamber}) => {
     const stats = <Statistics/>;
     return (
         <Container>
             <Row>
                 <Col>
-                    <h2>Attendance</h2>
+                    <h2>Party Loyalty</h2>
                     <br/>
-                    <p>The Constitution specifies that a majority of members constitutes a quorum to do business in each house. Representatives and senators rarely force the presence of a quorum by demanding quorum calls; thus, in most cases, debates continue even if a majority is not present.
-                    The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator stating "aye" or "no" when his or her name is announced. The House reserves roll-call votes for the most formal matters, as a roll-call of all 435 representatives takes quite some time; normally, members vote by electronic device. In the case of a tie, the motion in question fails. In the Senate, the Vice President may (if present) cast the tiebreaking vote.</p>
+                    <p>Those who consider themselves to be strong partisans, strong Democrats and strong Republicans respectively, tend to be the most faithful in voting for their party's nominee for office and legislation that backs their party's agenda.</p>
                 </Col>
                 <Col>
                     <h3>{chamber} at a glance</h3>
@@ -45,13 +44,13 @@ const Attendance = ({chamber}) => {
             </Row>
             <Row>
                 <Col>
-                    <h3>Least Engaged (Bottom 10% Attendance)</h3>
+                    <h3>Least Loyal (Bottom 10% of Party)</h3>
                     <Table striped bordered>
                         <thead>
                             <tr>
                             <th>Name</th>
-                            <th>Number of Missed Votes</th>
-                            <th>% Missed</th>
+                            <th>Number Party Votes</th>
+                            <th>% Party Votes</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,13 +73,13 @@ const Attendance = ({chamber}) => {
                     </Table>
                 </Col>
                 <Col>
-                    <h3>Most Engaged (Top 10% Attendance)</h3>
+                    <h3>Most Loyal (Top 10% of Party)</h3>
                     <Table striped bordered>
                         <thead>
                             <tr>
                             <th>Name</th>
-                            <th>Number of Missed Votes</th>
-                            <th>% Missed</th>
+                            <th>Number Party Votes</th>
+                            <th>% Party Votes</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -107,4 +106,4 @@ const Attendance = ({chamber}) => {
     );
 }
 
-export default Attendance;
+export default PartyLoyalty;

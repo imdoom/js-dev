@@ -88,12 +88,6 @@ const Statistics = () => {
         members.reduce((acc, curr, idx) => idx > n ? acc : type.push(Object.assign({}, curr)) && type, []);
     }
 
-    function count(members) {
-        let n = 0;
-        members.forEach(x => x.missed_votes_pct === 0 ? n++ : true);
-        return n;
-    }
-
     membersSenate.sort((a,b) => b.missed_votes_pct - a.missed_votes_pct);
     engagement(statistics.senate.leastEngaged, membersSenate, numSenate);
 
@@ -106,7 +100,7 @@ const Statistics = () => {
     membersSenate.sort((a,b) => a.missed_votes_pct - b.missed_votes_pct);
     engagement(statistics.house.mostEngaged, membersHouse, numHouse);
 
-    return (<h1>{JSON.stringify(statistics.senate.leastEngaged.length)}</h1>);
+    return statistics;
 };
 
 export default Statistics;
