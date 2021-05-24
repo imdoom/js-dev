@@ -3,7 +3,7 @@ import Statistics from './Statistics.js';
 import {Container, Row, Col, Table} from 'react-bootstrap';
 
 const Attendance = ({chamber}) => {
-    const stats = <Statistics/>;
+    const stats = <Statistics/>; //stats not imported
     return (
         <Container>
             <Row>
@@ -14,7 +14,7 @@ const Attendance = ({chamber}) => {
                     The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator stating "aye" or "no" when his or her name is announced. The House reserves roll-call votes for the most formal matters, as a roll-call of all 435 representatives takes quite some time; normally, members vote by electronic device. In the case of a tie, the motion in question fails. In the Senate, the Vice President may (if present) cast the tiebreaking vote.</p>
                 </Col>
                 <Col>
-                    <h3>{chamber} at a glance</h3>
+                    <h3>{chamber} at a glance</h3> //chamber is not being reflected
                     <Table striped bordered>
                         <thead>
                             <tr>
@@ -26,7 +26,7 @@ const Attendance = ({chamber}) => {
                         <tbody>
                             <tr>
                             <td>Democrats</td>
-                            {/* <td>{stats.senate.numberOfDemocrats}</td> */}
+                            {/* <td>{stats.senate.numberOfDemocrats}</td> */}       //not able to use stats here
                             {/* <td>{stats.house.averageVotesWithPartyDem}</td> */}
                             </tr>
                             <tr>
