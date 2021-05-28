@@ -8,6 +8,7 @@ import Banner from './components/Banner';
 import { Route, Switch } from 'react-router-dom';
 import Attendance from './components/Attendance';
 import PartyLoyalty from './components/PartyLoyalty';
+import Statistics from './components/Statistics';
 
 const heading = {
   "title": "TGIF Logo"
@@ -26,6 +27,7 @@ const App = () =>  {
   const [chamber, setChamber] = useState("null");
   return (
     <div>
+      <Statistics/>
       <Banner title={heading.title} />
       <Navigation setChamber = {setChamber}/>
       <Filter selected={selected} setSelected={setSelected} checked={checked} toggle={toggle}/>

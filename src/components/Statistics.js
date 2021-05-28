@@ -1,5 +1,6 @@
-import React from 'react';
-import senate from '../pro-congress-117-senate.json';
+import { useState, useEffect } from 'react';
+
+// import senate from '../pro-congress-117-senate.json';
 import house from '../pro-congress-117-house.json';
 
 var statistics = 
@@ -32,6 +33,29 @@ var demsHouse, repsHouse, indsHouse, demsSenate, repsSenate, indsSenate, sumRep 
 var membersSenate, membersHouse;
 
 const Statistics = () => {
+    const [senate, setSenate] = useState({ "senate": {}, "house": {}});
+    const url = 'https://api.propublica.org/congress/v1/117/senate/members.json';
+
+    useEffect(() => {
+        const fetchSenate = async () => {
+            try {
+                const response = await fetch(url, {
+                    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                    headers: {
+                    'X-API-Key': 'vctcu5pNe2XTfQF7qVnf8rhPjJpze73auOv5nHn9'
+                    }
+                });
+                if (!response.ok) throw response.statusText;
+                const json = await response.json();
+                alert(json);
+                setSenate(json);
+            } catch (e) {
+                alert(e.message);
+            }            
+        };
+        fetchSenate();
+    }, [url]);
+    
     membersHouse = house.results[0].members;
     membersSenate = senate.results[0].members;
     numSenate = membersSenate.length;
@@ -100,7 +124,7 @@ const Statistics = () => {
     membersSenate.sort((a,b) => a.missed_votes_pct - b.missed_votes_pct);
     engagement(statistics.house.mostEngaged, membersHouse, numHouse);
 
-    return statistics;
+    return <h1>{JSON.stringify(statistics)}</h1>;
 };
 
 export default Statistics;
