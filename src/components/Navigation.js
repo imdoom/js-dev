@@ -12,8 +12,8 @@ const Navigation = ({setChamber}) => (
             <NavDropdown.Item href="/houseMembers">House</NavDropdown.Item>
         </NavDropdown>
         <NavDropdown title="Attendance" id="dropdown-attendance">
-            <NavDropdown.Item onSelect={setChamber("senate")} href="/attendance" >Senate</NavDropdown.Item>
-            <NavDropdown.Item onSelect={setChamber("house")} href="/attendance">House</NavDropdown.Item>
+            <NavDropdown.Item onSelect={() => setChamber("senate")} href="/attendance" >Senate</NavDropdown.Item>
+            <NavDropdown.Item onSelect={() => setChamber("house")} href="/attendance">House</NavDropdown.Item>
         </NavDropdown>
         <NavDropdown title="Party Loyalty" id="dropdown-loyalty">
             <NavDropdown.Item href="/partyLoyalty">Senate</NavDropdown.Item>
